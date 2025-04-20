@@ -26,7 +26,7 @@ const int NUM_MOTIONS = 12;   // Increased number of predefined motions
 // Motion 1: Ear twitch
 const int motion1[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {100, 100, 150}, // Quick twitch
+  {100, 100, 150}, // Quick twitch to the right
   {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
@@ -34,107 +34,107 @@ const int motion1[MOTION_STEPS][3] = {
 // Motion 2: Ear wiggle
 const int motion2[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {80, 100, 300}, // Left ear down, right ear up
-  {100, 80, 300}, // Left ear up, right ear down
-  {80, 100, 300}, // Left ear down, right ear up
-  {100, 80, 300}, // Left ear up, right ear down
+  {80, 100, 300},  // Left ear left, right ear right
+  {100, 80, 300},  // Left ear right, right ear left
+  {80, 100, 300},  // Left ear left, right ear right
+  {100, 80, 300},  // Left ear right, right ear left
   {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
-// Motion 3: Ear rotation
+// Motion 3: Ear sweep
 const int motion3[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {0, 0, 800},    // Both ears forward
-  {180, 180, 800}, // Both ears backward
+  {0, 0, 800},    // Both ears to the left
+  {180, 180, 800}, // Both ears to the right
   {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
-// Motion 4: Alert/Perked Ears
+// Motion 4: Alert ears
 const int motion4[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {60, 60, 400},   // Ears forward and slightly raised
+  {60, 60, 400},   // Both ears to the left
   {60, 60, 2000},  // Hold position
   {90, 90, 400},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
-// Motion 5: Relaxed Ears
+// Motion 5: Relaxed ears
 const int motion5[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {120, 120, 400}, // Ears slightly back
+  {120, 120, 400}, // Both ears to the right
   {120, 120, 2000}, // Hold position
   {90, 90, 400},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
-// Motion 6: Curious Tilt
+// Motion 6: Curious tilt
 const int motion6[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {60, 120, 400},  // Left ear forward, right ear back
+  {60, 120, 400},  // Left ear left, right ear right
   {60, 120, 2000}, // Hold position
   {90, 90, 400},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
-// Motion 7: Startled Ears
+// Motion 7: Startled ears
 const int motion7[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {30, 30, 100},   // Quick movement to startled position
+  {30, 30, 100},   // Quick movement to the left
   {30, 30, 500},   // Hold startled position
   {90, 90, 400},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
-// Motion 8: Happy Ears
+// Motion 8: Happy ears
 const int motion8[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {80, 80, 300},   // Ears slightly back
-  {100, 100, 300}, // Ears slightly forward
-  {80, 80, 300},   // Ears slightly back
-  {100, 100, 300}, // Ears slightly forward
-  {80, 80, 300},   // Ears slightly back
+  {80, 80, 300},   // Both ears slightly left
+  {100, 100, 300}, // Both ears slightly right
+  {80, 80, 300},   // Both ears slightly left
+  {100, 100, 300}, // Both ears slightly right
+  {80, 80, 300},   // Both ears slightly left
   {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
-// Motion 9: Annoyed Flick
+// Motion 9: Annoyed flick
 const int motion9[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {70, 70, 100},   // Quick flick back
-  {110, 110, 100}, // Quick flick forward
+  {70, 70, 100},   // Quick flick to the left
+  {110, 110, 100}, // Quick flick to the right
   {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
-// Motion 10: Hunting Mode
+// Motion 10: Scanning ears
 const int motion10[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {45, 45, 500},   // Ears forward
-  {45, 90, 800},   // Left ear forward, right ear center
-  {90, 45, 800},   // Right ear forward, left ear center
-  {45, 45, 800},   // Both ears forward
+  {45, 45, 500},   // Both ears to the left
+  {45, 90, 800},   // Left ear left, right ear center
+  {90, 45, 800},   // Right ear left, left ear center
+  {45, 45, 800},   // Both ears to the left
   {90, 90, 500},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
-// Motion 11: Sleepy Ears
+// Motion 11: Sleepy ears
 const int motion11[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {130, 130, 400}, // Ears drooping down
+  {130, 130, 400}, // Both ears to the right
   {130, 130, 2000}, // Hold position
   {90, 90, 400},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
-// Motion 12: Greeting Ears
+// Motion 12: Greeting ears
 const int motion12[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
-  {70, 70, 300},   // Ears back
-  {110, 110, 300}, // Ears forward
-  {70, 70, 300},   // Ears back
-  {110, 110, 300}, // Ears forward
+  {70, 70, 300},   // Both ears to the left
+  {110, 110, 300}, // Both ears to the right
+  {70, 70, 300},   // Both ears to the left
+  {110, 110, 300}, // Both ears to the right
   {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
@@ -161,14 +161,14 @@ void setup() {
   Serial.println("Available commands:");
   Serial.println("1 - Ear twitch");
   Serial.println("2 - Ear wiggle");
-  Serial.println("3 - Ear rotation");
-  Serial.println("4 - Alert/Perked ears");
+  Serial.println("3 - Ear sweep");
+  Serial.println("4 - Alert ears");
   Serial.println("5 - Relaxed ears");
   Serial.println("6 - Curious tilt");
   Serial.println("7 - Startled ears");
   Serial.println("8 - Happy ears");
   Serial.println("9 - Annoyed flick");
-  Serial.println("10 - Hunting mode");
+  Serial.println("10 - Scanning ears");
   Serial.println("11 - Sleepy ears");
   Serial.println("12 - Greeting ears");
   Serial.println("s1,angle - Set servo 1 to angle (0-180)");
@@ -246,14 +246,14 @@ void processCommand() {
     Serial.println("Available commands:");
     Serial.println("1 - Ear twitch");
     Serial.println("2 - Ear wiggle");
-    Serial.println("3 - Ear rotation");
-    Serial.println("4 - Alert/Perked ears");
+    Serial.println("3 - Ear sweep");
+    Serial.println("4 - Alert ears");
     Serial.println("5 - Relaxed ears");
     Serial.println("6 - Curious tilt");
     Serial.println("7 - Startled ears");
     Serial.println("8 - Happy ears");
     Serial.println("9 - Annoyed flick");
-    Serial.println("10 - Hunting mode");
+    Serial.println("10 - Scanning ears");
     Serial.println("11 - Sleepy ears");
     Serial.println("12 - Greeting ears");
     Serial.println("s1,angle - Set servo 1 to angle (0-180)");
