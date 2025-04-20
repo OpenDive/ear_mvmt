@@ -3,20 +3,13 @@
 // Pin definitions
 static const int servoPin = 13;
 static const int servoPin2 = 12;
-static const int button1Pin = 14;  // Button for motion 1
-static const int button2Pin = 15;  // Button for motion 2
-static const int button3Pin = 16;  // Button for motion 3
 
 // Servo objects
 Servo servo1;
 Servo servo2;
 
-// Button states
-int lastButton1State = HIGH;
-int lastButton2State = HIGH;
-int lastButton3State = HIGH;
-unsigned long lastDebounceTime = 0;
-unsigned long debounceDelay = 50;
+// Function prototypes
+const int (*getMotion(int motionNum))[3];
 
 // Motion state
 bool isPlayingMotion = false;
@@ -32,7 +25,7 @@ const int NUM_MOTIONS = 3;    // Number of predefined motions
 
 // Motion 1: Ear twitch
 const int motion1[MOTION_STEPS][3] = {
-  {90, 90, 0},    // Start position
+  {90, 90, 100},   // Start position
   {100, 100, 100}, // Quick twitch
   {90, 90, 500},   // Back to center
   {0, 0, 0}        // End of motion
@@ -40,7 +33,7 @@ const int motion1[MOTION_STEPS][3] = {
 
 // Motion 2: Ear wiggle
 const int motion2[MOTION_STEPS][3] = {
-  {90, 90, 0},    // Start position
+  {90, 90, 100},   // Start position
   {80, 100, 200}, // Left ear down, right ear up
   {100, 80, 200}, // Left ear up, right ear down
   {80, 100, 200}, // Left ear down, right ear up
@@ -51,12 +44,16 @@ const int motion2[MOTION_STEPS][3] = {
 
 // Motion 3: Ear rotation
 const int motion3[MOTION_STEPS][3] = {
-  {90, 90, 0},    // Start position
+  {90, 90, 100},   // Start position
   {0, 0, 500},    // Both ears forward
   {180, 180, 500}, // Both ears backward
   {90, 90, 500},   // Back to center
   {0, 0, 0}        // End of motion
 };
+
+// Serial command buffer
+String inputString = "";
+bool stringComplete = false;
 
 void setup() {
   Serial.begin(115200);
@@ -65,29 +62,44 @@ void setup() {
   servo1.attach(servoPin);
   servo2.attach(servoPin2);
   
-  // Initialize buttons
-  pinMode(button1Pin, INPUT_PULLUP);
-  pinMode(button2Pin, INPUT_PULLUP);
-  pinMode(button3Pin, INPUT_PULLUP);
-  
   // Move to default position
   servo1.write(90);
   servo2.write(90);
   
+  // Reserve 200 bytes for the inputString
+  inputString.reserve(200);
+  
   Serial.println("Cat Ear Motion Controller initialized");
-  Serial.println("Press buttons 1-3 to trigger different ear motions");
+  Serial.println("Available commands:");
+  Serial.println("1 - Ear twitch");
+  Serial.println("2 - Ear wiggle");
+  Serial.println("3 - Ear rotation");
+  Serial.println("s1,angle - Set servo 1 to angle (0-180)");
+  Serial.println("s2,angle - Set servo 2 to angle (0-180)");
+  Serial.println("c - Center both servos");
+  Serial.println("h - Show this help message");
 }
 
 void loop() {
-  // Check for button presses
-  checkButton(button1Pin, lastButton1State, 1);
-  checkButton(button2Pin, lastButton2State, 2);
-  checkButton(button3Pin, lastButton3State, 3);
+  // Check for serial data
+  while (Serial.available()) {
+    char inChar = (char)Serial.read();
+    
+    // Add the incoming character to the string
+    inputString += inChar;
+    
+    // If the incoming character is a newline, set a flag
+    if (inChar == '\n') {
+      stringComplete = true;
+    }
+  }
   
-  // Update button states
-  lastButton1State = digitalRead(button1Pin);
-  lastButton2State = digitalRead(button2Pin);
-  lastButton3State = digitalRead(button3Pin);
+  // Process serial commands
+  if (stringComplete) {
+    processCommand();
+    inputString = "";
+    stringComplete = false;
+  }
   
   // Play current motion if active
   if (isPlayingMotion) {
@@ -98,18 +110,48 @@ void loop() {
   delay(10);
 }
 
-void checkButton(int buttonPin, int &lastButtonState, int motionNum) {
-  int buttonState = digitalRead(buttonPin);
+void processCommand() {
+  // Trim whitespace and newlines
+  inputString.trim();
   
-  if (buttonState != lastButtonState) {
-    lastDebounceTime = millis();
-  }
-  
-  if ((millis() - lastDebounceTime) > debounceDelay) {
-    if (buttonState == LOW && !isPlayingMotion) {
-      // Start the motion
-      startMotion(motionNum);
-    }
+  // Check for motion commands
+  if (inputString == "1") {
+    startMotion(1);
+  } else if (inputString == "2") {
+    startMotion(2);
+  } else if (inputString == "3") {
+    startMotion(3);
+  } else if (inputString == "c") {
+    // Center both servos
+    servo1.write(90);
+    servo2.write(90);
+    Serial.println("Servos centered");
+  } else if (inputString == "h") {
+    // Show help message
+    Serial.println("Available commands:");
+    Serial.println("1 - Ear twitch");
+    Serial.println("2 - Ear wiggle");
+    Serial.println("3 - Ear rotation");
+    Serial.println("s1,angle - Set servo 1 to angle (0-180)");
+    Serial.println("s2,angle - Set servo 2 to angle (0-180)");
+    Serial.println("c - Center both servos");
+    Serial.println("h - Show this help message");
+  } else if (inputString.startsWith("s1,")) {
+    // Set servo 1 to specific angle
+    int angle = inputString.substring(3).toInt();
+    angle = constrain(angle, 0, 180);
+    servo1.write(angle);
+    Serial.print("Servo 1 set to ");
+    Serial.println(angle);
+  } else if (inputString.startsWith("s2,")) {
+    // Set servo 2 to specific angle
+    int angle = inputString.substring(3).toInt();
+    angle = constrain(angle, 0, 180);
+    servo2.write(angle);
+    Serial.print("Servo 2 set to ");
+    Serial.println(angle);
+  } else {
+    Serial.println("Unknown command. Type 'h' for help.");
   }
 }
 
@@ -132,7 +174,7 @@ void playMotion() {
   const int (*motion)[3] = getMotion(currentMotion);
   
   // Check if we've reached the end of the motion
-  if (motion[currentStep][2] == 0) {
+  if (currentStep >= MOTION_STEPS || (motion[currentStep][0] == 0 && motion[currentStep][1] == 0 && motion[currentStep][2] == 0)) {
     isPlayingMotion = false;
     Serial.print("Motion ");
     Serial.print(currentMotion);
@@ -152,6 +194,15 @@ void playMotion() {
   // If enough time has passed, move to the next step
   if (elapsedTime >= stepStartTime + motion[currentStep][2]) {
     currentStep++;
+    
+    // Check if we've reached the end of the motion
+    if (currentStep >= MOTION_STEPS || (motion[currentStep][0] == 0 && motion[currentStep][1] == 0 && motion[currentStep][2] == 0)) {
+      isPlayingMotion = false;
+      Serial.print("Motion ");
+      Serial.print(currentMotion);
+      Serial.println(" completed");
+      return;
+    }
     
     // Move to the next position
     servo1.write(motion[currentStep][0]);
