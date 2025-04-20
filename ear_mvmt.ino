@@ -25,117 +25,117 @@ const int NUM_MOTIONS = 12;   // Increased number of predefined motions
 
 // Motion 1: Ear twitch
 const int motion1[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {100, 100, 100}, // Quick twitch
-  {90, 90, 500},   // Back to center
+  {90, 90, 200},   // Start position
+  {100, 100, 150}, // Quick twitch
+  {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
 // Motion 2: Ear wiggle
 const int motion2[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {80, 100, 200}, // Left ear down, right ear up
-  {100, 80, 200}, // Left ear up, right ear down
-  {80, 100, 200}, // Left ear down, right ear up
-  {100, 80, 200}, // Left ear up, right ear down
-  {90, 90, 500},   // Back to center
+  {90, 90, 200},   // Start position
+  {80, 100, 300}, // Left ear down, right ear up
+  {100, 80, 300}, // Left ear up, right ear down
+  {80, 100, 300}, // Left ear down, right ear up
+  {100, 80, 300}, // Left ear up, right ear down
+  {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
 // Motion 3: Ear rotation
 const int motion3[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {0, 0, 500},    // Both ears forward
-  {180, 180, 500}, // Both ears backward
-  {90, 90, 500},   // Back to center
+  {90, 90, 200},   // Start position
+  {0, 0, 800},    // Both ears forward
+  {180, 180, 800}, // Both ears backward
+  {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
 // Motion 4: Alert/Perked Ears
 const int motion4[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {60, 60, 300},   // Ears forward and slightly raised
-  {60, 60, 1000},  // Hold position
-  {90, 90, 300},   // Back to center
+  {90, 90, 200},   // Start position
+  {60, 60, 400},   // Ears forward and slightly raised
+  {60, 60, 2000},  // Hold position
+  {90, 90, 400},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
 // Motion 5: Relaxed Ears
 const int motion5[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {120, 120, 300}, // Ears slightly back
-  {120, 120, 1000}, // Hold position
-  {90, 90, 300},   // Back to center
+  {90, 90, 200},   // Start position
+  {120, 120, 400}, // Ears slightly back
+  {120, 120, 2000}, // Hold position
+  {90, 90, 400},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
 // Motion 6: Curious Tilt
 const int motion6[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {60, 120, 300},  // Left ear forward, right ear back
-  {60, 120, 1000}, // Hold position
-  {90, 90, 300},   // Back to center
+  {90, 90, 200},   // Start position
+  {60, 120, 400},  // Left ear forward, right ear back
+  {60, 120, 2000}, // Hold position
+  {90, 90, 400},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
 // Motion 7: Startled Ears
 const int motion7[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {30, 30, 50},    // Quick movement to startled position
-  {30, 30, 200},   // Hold startled position
-  {90, 90, 300},   // Back to center
+  {90, 90, 200},   // Start position
+  {30, 30, 100},   // Quick movement to startled position
+  {30, 30, 500},   // Hold startled position
+  {90, 90, 400},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
 // Motion 8: Happy Ears
 const int motion8[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {80, 80, 150},   // Ears slightly back
-  {100, 100, 150}, // Ears slightly forward
-  {80, 80, 150},   // Ears slightly back
-  {100, 100, 150}, // Ears slightly forward
-  {80, 80, 150},   // Ears slightly back
-  {90, 90, 300},   // Back to center
+  {90, 90, 200},   // Start position
+  {80, 80, 300},   // Ears slightly back
+  {100, 100, 300}, // Ears slightly forward
+  {80, 80, 300},   // Ears slightly back
+  {100, 100, 300}, // Ears slightly forward
+  {80, 80, 300},   // Ears slightly back
+  {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
 // Motion 9: Annoyed Flick
 const int motion9[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {70, 70, 50},    // Quick flick back
-  {110, 110, 50},  // Quick flick forward
-  {90, 90, 300},   // Back to center
+  {90, 90, 200},   // Start position
+  {70, 70, 100},   // Quick flick back
+  {110, 110, 100}, // Quick flick forward
+  {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
 // Motion 10: Hunting Mode
 const int motion10[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {45, 45, 300},   // Ears forward
-  {45, 90, 300},   // Left ear forward, right ear center
-  {90, 45, 300},   // Right ear forward, left ear center
-  {45, 45, 300},   // Both ears forward
-  {90, 90, 300},   // Back to center
+  {90, 90, 200},   // Start position
+  {45, 45, 500},   // Ears forward
+  {45, 90, 800},   // Left ear forward, right ear center
+  {90, 45, 800},   // Right ear forward, left ear center
+  {45, 45, 800},   // Both ears forward
+  {90, 90, 500},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
 // Motion 11: Sleepy Ears
 const int motion11[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {130, 130, 300}, // Ears drooping down
-  {130, 130, 1000}, // Hold position
-  {90, 90, 300},   // Back to center
+  {90, 90, 200},   // Start position
+  {130, 130, 400}, // Ears drooping down
+  {130, 130, 2000}, // Hold position
+  {90, 90, 400},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
 // Motion 12: Greeting Ears
 const int motion12[MOTION_STEPS][3] = {
-  {90, 90, 100},   // Start position
-  {70, 70, 200},   // Ears back
-  {110, 110, 200}, // Ears forward
-  {70, 70, 200},   // Ears back
-  {110, 110, 200}, // Ears forward
-  {90, 90, 300},   // Back to center
+  {90, 90, 200},   // Start position
+  {70, 70, 300},   // Ears back
+  {110, 110, 300}, // Ears forward
+  {70, 70, 300},   // Ears back
+  {110, 110, 300}, // Ears forward
+  {90, 90, 800},   // Back to center
   {0, 0, 0}        // End of motion
 };
 
