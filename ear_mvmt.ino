@@ -1,8 +1,8 @@
 #include <ESP32Servo.h>
 
 // Pin definitions
-static const int servoPin = 13;
-static const int servoPin2 = 12;
+static const int servoPin = 13; // RIGHT ear from Robot's perspective; LEFT ear from user's perspective
+static const int servoPin2 = 12; // LEFT ear from robot's perspective; RIGHT ear from user's perspective
 
 // Servo objects
 Servo servo1;
@@ -69,6 +69,7 @@ const int motion5[MOTION_STEPS][3] = {
   {0, 0, 0}        // End of motion
 };
 
+// TODO: Review these motions, they might be wrong
 // Motion 6: Curious tilt
 const int motion6[MOTION_STEPS][3] = {
   {90, 90, 200},   // Start position
