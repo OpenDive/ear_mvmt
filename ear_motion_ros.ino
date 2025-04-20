@@ -190,6 +190,7 @@ void subscription_callback(const void * msgin)
 }
 
 void setup() {
+  // Initialize Serial for debugging
   Serial.begin(115200);
   
   // Initialize LED
@@ -227,9 +228,17 @@ void setup() {
   Serial.println("h - Show this help message");
   
   // Initialize micro-ROS
+  Serial.println("Initializing micro-ROS...");
+  
+  // Configure micro-ROS transport
+  // For ESP32, we use the default serial transport
   set_microros_transports();
+  
+  // Wait for the agent to be available
+  Serial.println("Waiting for micro-ROS agent...");
   delay(2000);
   
+  // Initialize ROS2
   allocator = rcl_get_default_allocator();
   
   // Create init_options
@@ -250,6 +259,7 @@ void setup() {
   RCCHECK(rclc_executor_add_subscription(&executor, &subscriber, &msg, &subscription_callback, ON_NEW_DATA));
   
   Serial.println("ROS2 node initialized. Listening for commands on topic 'ear_motion_command'");
+  Serial.println("To test, publish a message: ros2 topic pub /ear_motion_command std_msgs/Int32 \"data: 1\"");
 }
 
 void loop() {
